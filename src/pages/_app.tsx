@@ -1,5 +1,5 @@
 // src/pages/_app.tsx
-import Layout from '@/components/layout';
+import { Layout } from '@/components/layout';
 import { AppRouter } from '@/server/router';
 import '@/styles/globals.css';
 import { withTRPC } from '@trpc/next';

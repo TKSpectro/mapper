@@ -8,7 +8,7 @@ type Props = {
   title?: string;
 };
 
-const Layout = ({ children, title = 'This is the default title' }: Props) => {
+export function Layout({ children, title = 'This is the default title' }: Props) {
   const { data: session } = useSession();
 
   return (
@@ -29,6 +29,10 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => {
                 <a>Dashboard</a>
               </Link>{' '}
               |{' '}
+              <Link href="/todo">
+                <a>Todos</a>
+              </Link>{' '}
+              |{' '}
               <Link href="/profile">
                 <a>Profile</a>
               </Link>{' '}
@@ -45,6 +49,4 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => {
       {children}
     </div>
   );
-};
-
-export default Layout;
+}

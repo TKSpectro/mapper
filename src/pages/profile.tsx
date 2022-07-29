@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import type { NextPage } from 'next';
 import { signOut, useSession } from 'next-auth/react';
 import Head from 'next/head';
@@ -22,7 +23,9 @@ const Profile: NextPage = () => {
           Signed in as {session?.user?.name} <br />
           Email: {session?.user?.email} <br />
           <Image src={session?.user?.image || ''} alt="Profile picture" width={100} height={100} />
-          <button onClick={() => signOut({ callbackUrl: '/' })}>Sign out</button>
+          <Button variant="info" onClick={() => signOut({ callbackUrl: '/' })}>
+            Sign out
+          </Button>
         </>
       </main>
     </>
