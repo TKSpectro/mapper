@@ -1,26 +1,39 @@
 import { Button } from '@/components/ui/button';
+import { Form, useZodForm } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import { trpc } from '@/utils/trpc';
 import autoAnimate from '@formkit/auto-animate';
+import { CheckCircleIcon, MinusCircleIcon, TrashIcon } from '@heroicons/react/outline';
+import clsx from 'clsx';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect, useRef } from 'react';
+import { z } from 'zod';
+dayjs.extend(relativeTime);
 
 const Todo: NextPage = () => {
-  const { data: todos, refetch: refetchTodos } = trpc.useQuery(['todo.getTodos']);
-  const { mutate: addTodo } = trpc.useMutation(['todo.addTodo'], {
+  const { data: todos, refetch: refetchTodos } = trpc.useQuery(['todo.getAll']);
+  const { mutate: addTodo } = trpc.useMutation(['todo.add'], {
     onSuccess: () => refetchTodos(),
   });
-  const { mutate: removeTodo } = trpc.useMutation(['todo.removeTodo'], {
+  const { mutate: removeTodo } = trpc.useMutation(['todo.remove'], {
+    onSuccess: () => refetchTodos(),
+  });
+  const { mutate: completeTodo } = trpc.useMutation(['todo.complete'], {
     onSuccess: () => refetchTodos(),
   });
 
-  const handleAdd = () => {
-    addTodo({ title: `New todo ${new Date().getMinutes() + new Date().getMilliseconds()}` });
-  };
-
-  const handleRemove = (id: string) => {
-    removeTodo({ id: id });
-  };
+  const form = useZodForm({
+    schema: z.object({
+      title: z.string().min(1, { message: 'Must be at least 1 character long' }),
+      description: z
+        .string()
+        .max(300, { message: 'Must be 300 or less characters long' })
+        .nullable(),
+    }),
+  });
 
   // Add autoanimate for the grid
   const parent = useRef(null);
@@ -41,22 +54,54 @@ const Todo: NextPage = () => {
           Todo
         </h1>
         <div className="pb-4">
-          <Button onClick={() => handleAdd()}>Add</Button>
+          <Form
+            form={form}
+            onSubmit={(data) => {
+              addTodo({
+                ...data,
+              });
+            }}
+          >
+            <Input label="Title" {...form.register('title')} placeholder="My Todo" />
+            <Input label="Description" {...form.register('description')} />
+
+            <Button type="submit">Submit</Button>
+          </Form>
         </div>
-        <div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 select-none"
-          ref={parent}
-        >
-          {todos?.map((item) => {
-            return (
-              <div key={item.id} className="mx-2">
-                <div>{item.title}</div>
-                <Button onClick={() => handleRemove(item.id)}>
-                  <div className="select-none">Remove</div>
-                </Button>
+        <div className="flex flex-wrap justify-center gap-4 p-8 select-none" ref={parent}>
+          {todos?.map((item) => (
+            <div
+              key={item.id}
+              className={clsx(
+                'relative flex h-52 w-96 animate-fade-in-down flex-col rounded border border-gray-500 bg-gray-200 shadow-xl',
+                { 'opacity-50': item.completed },
+              )}
+            >
+              <div className="flex justify-between border-b border-gray-500 p-4">
+                {item.title}
+                <div className="flex gap-4">
+                  <button onClick={() => completeTodo({ id: item.id })}>
+                    {item.completed ? (
+                      <CheckCircleIcon className="h-6 w-6 text-gray-800" />
+                    ) : (
+                      <MinusCircleIcon className="h-6 w-6 text-gray-800" />
+                    )}
+                  </button>
+                  <button onClick={() => removeTodo({ id: item.id })}>
+                    <TrashIcon className="h-6 w-6 text-gray-800" />
+                  </button>
+                </div>
               </div>
-            );
-          })}
+
+              <div className={clsx('px-4 py-2 text-ellipsis overflow-hidden')}>
+                {item.description}
+              </div>
+
+              <div className="absolute bottom-0 w-full px-4 py-2 border-t border-gray-500 text-end">
+                {dayjs(item.createdAt).fromNow()}
+              </div>
+            </div>
+          ))}
         </div>
       </main>
     </>

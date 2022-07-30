@@ -33,6 +33,10 @@ export function Layout({ children, title = 'This is the default title' }: Props)
                 <a>Todos</a>
               </Link>{' '}
               |{' '}
+              <Link href="/components">
+                <a>Components</a>
+              </Link>{' '}
+              |{' '}
               <Link href="/profile">
                 <a>Profile</a>
               </Link>{' '}
