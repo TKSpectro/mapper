@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "prisma:reset": "prisma migrate reset",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio --browser none"
   },
   "dependencies": {
     "@formkit/auto-animate": "^1.0.0-beta.1",
