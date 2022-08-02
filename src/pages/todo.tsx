@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Form, useZodForm } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Loading } from '@/components/ui/loading';
 import { trpc } from '@/utils/trpc';
 import autoAnimate from '@formkit/auto-animate';
 import { CheckCircleIcon, MinusCircleIcon, TrashIcon } from '@heroicons/react/outline';
@@ -11,16 +12,20 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect, useRef } from 'react';
 import { z } from 'zod';
+
 dayjs.extend(relativeTime);
 
 const Todo: NextPage = () => {
-  const { data: todos, refetch: refetchTodos } = trpc.useQuery(['todo.getAll']);
+  const { data: todos, isLoading, refetch: refetchTodos } = trpc.useQuery(['todo.getAll']);
+
   const { mutate: addTodo } = trpc.useMutation(['todo.add'], {
     onSuccess: () => refetchTodos(),
   });
+
   const { mutate: removeTodo } = trpc.useMutation(['todo.remove'], {
     onSuccess: () => refetchTodos(),
   });
+
   const { mutate: completeTodo } = trpc.useMutation(['todo.complete'], {
     onSuccess: () => refetchTodos(),
   });
@@ -69,6 +74,7 @@ const Todo: NextPage = () => {
           </Form>
         </div>
         <div className="flex flex-wrap justify-center gap-4 p-8 select-none" ref={parent}>
+          {isLoading && <Loading width={200} height={200} />}
           {todos?.map((item) => (
             <div
               key={item.id}
