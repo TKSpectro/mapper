@@ -44,14 +44,16 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  todos         Todo[]
+  id             String    @id @default(cuid())
+  name           String?
+  email          String?   @unique
+  emailVerified  DateTime?
+  image          String?
+  accounts       Account[]
+  sessions       Session[]
+  todos          Todo[]
+  ownedMeetings  Meeting[]
+  joinedMeetings Meeting[] @relation("participants")
 }
 
 model VerificationToken {
@@ -71,4 +73,25 @@ model Todo {
   updatedAt   DateTime @updatedAt
   userId      String
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Meeting {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  deadline    DateTime?
+  location    String?
+  link        String?
+  closed      Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  ownerId     String
+  owner       User      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  // TODO: Instead of directyly referencing user, add participant model which can 
+  // have a user and gives use the possibilty for public meetings and private ones which
+  // would need a invitation or something like that.
+  participants User[] @relation(name: "participants")
+  // TODO: Votes
+  // TODO: Comments
 }

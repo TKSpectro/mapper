@@ -1,13 +1,13 @@
 import superjson from 'superjson';
 import { createRouter } from './context';
 
+import { meetingRouter } from './meeting-router';
 import { todoRouter } from './todo-router';
 
 export const appRouter = createRouter()
   .transformer(superjson)
-  // .merge('example.', exampleRouter)
-  // .merge('question.', protectedExampleRouter)
-  .merge('todo.', todoRouter);
+  .merge('todo.', todoRouter)
+  .merge('meeting.', meetingRouter);
 
 // export type definition of API
 export type AppRouter = typeof appRouter;
