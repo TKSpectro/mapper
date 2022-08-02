@@ -55,7 +55,9 @@ export function SideNav() {
         )}
       >
         <Link href="https://github.com/TKSpectro/mapper">
-          <FiGithub className="cursor-pointer float-right w-6 h-6" />
+          <a>
+            <FiGithub className="float-right w-6 h-6" />
+          </a>
         </Link>
       </div>
     </aside>
