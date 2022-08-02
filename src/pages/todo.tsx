@@ -4,13 +4,13 @@ import { Input } from '@/components/ui/input';
 import { Loading } from '@/components/ui/loading';
 import { trpc } from '@/utils/trpc';
 import autoAnimate from '@formkit/auto-animate';
-import { CheckCircleIcon, MinusCircleIcon, TrashIcon } from '@heroicons/react/outline';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect, useRef } from 'react';
+import { HiOutlineCheckCircle, HiOutlineMinusCircle, HiOutlineTrash } from 'react-icons/hi';
 import { z } from 'zod';
 
 dayjs.extend(relativeTime);
@@ -88,13 +88,13 @@ const Todo: NextPage = () => {
                 <div className="flex gap-4">
                   <button onClick={() => completeTodo({ id: item.id })}>
                     {item.completed ? (
-                      <CheckCircleIcon className="h-6 w-6 text-gray-800" />
+                      <HiOutlineCheckCircle className="h-6 w-6 text-gray-800" />
                     ) : (
-                      <MinusCircleIcon className="h-6 w-6 text-gray-800" />
+                      <HiOutlineMinusCircle className="h-6 w-6 text-gray-800" />
                     )}
                   </button>
                   <button onClick={() => removeTodo({ id: item.id })}>
-                    <TrashIcon className="h-6 w-6 text-gray-800" />
+                    <HiOutlineTrash className="h-6 w-6 text-gray-800" />
                   </button>
                 </div>
               </div>

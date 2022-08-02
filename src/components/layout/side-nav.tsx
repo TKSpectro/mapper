@@ -1,9 +1,10 @@
-import { MenuAlt3Icon, XIcon } from '@heroicons/react/outline';
 import clsx from 'clsx';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { FiGithub } from 'react-icons/fi';
+import { HiOutlineMenuAlt3, HiOutlineX } from 'react-icons/hi';
 import { Button } from '../ui/button';
 
 export function SideNav() {
@@ -23,8 +24,8 @@ export function SideNav() {
           onClick={() => setOpen(!open)}
         >
           <svg fill="currentColor" viewBox="0 0 20 20" className="w-6 h-6">
-            {!open && <MenuAlt3Icon className="w-6 h-6 text-gray-800" />}
-            {open && <XIcon className="h-6 w-6 text-gray-800" />}
+            {!open && <HiOutlineMenuAlt3 className="w-6 h-6 text-gray-800" />}
+            {open && <HiOutlineX className="h-6 w-6 text-gray-800" />}
           </svg>
         </Button>
       </div>
@@ -44,6 +45,19 @@ export function SideNav() {
         )}
         {!session && <NavLink href="/auth/login">Login</NavLink>}
       </nav>
+      <div
+        className={clsx(
+          'md:absolute md:block bottom-0 w-full py-4 px-8 md:px-4 border-t border-gray-500',
+          {
+            block: open,
+            hidden: !open,
+          },
+        )}
+      >
+        <Link href="https://github.com/TKSpectro/mapper">
+          <FiGithub className="cursor-pointer float-right w-6 h-6" />
+        </Link>
+      </div>
     </aside>
   );
 }

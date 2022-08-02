@@ -1,11 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { CurrencyEuroIcon } from '@heroicons/react/outline';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { useForm } from 'react-hook-form';
+import { HiCurrencyEuro } from 'react-icons/hi';
 import { z } from 'zod';
 
 const Components: NextPage = () => {
@@ -73,7 +73,7 @@ const Components: NextPage = () => {
           <Input label="Label" placeholder="Some text placeholder" {...form.register('text2')} />
           <Input type="number" {...form.register('number', { valueAsNumber: true })} />
           <Input
-            icon={<CurrencyEuroIcon className="h-6 w-6 text-gray-800" />}
+            icon={<HiCurrencyEuro className="h-6 w-6 text-gray-800" />}
             type="number"
             step={0.01}
             {...form.register('number2', { valueAsNumber: true })}
