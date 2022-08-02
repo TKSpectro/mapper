@@ -18,7 +18,7 @@ dayjs.extend(relativeTime);
 const Todo: NextPage = () => {
   const { data: todos, isLoading, refetch: refetchTodos } = trpc.useQuery(['todo.getAll']);
 
-  const { mutate: addTodo } = trpc.useMutation(['todo.add'], {
+  const { mutate: addTodo } = trpc.useMutation(['todo.create'], {
     onSuccess: () => refetchTodos(),
   });
 

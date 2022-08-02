@@ -10,7 +10,7 @@ export const todoRouter = createProtectedRouter()
       });
     },
   })
-  .mutation('add', {
+  .mutation('create', {
     input: z.object({
       title: z.string(),
       description: z.string().nullish(),
