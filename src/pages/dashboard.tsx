@@ -40,7 +40,7 @@ const Dashboard: NextPage = () => {
       </Head>
 
       <main className="container mx-auto flex flex-col items-center p-4">
-        <h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-700">
+        <h1 className="text-5xl font-extrabold leading-normal text-gray-700 md:text-[5rem]">
           Dashboard
         </h1>
         <Form form={form} onSubmit={(data) => createMeeting(data)}>

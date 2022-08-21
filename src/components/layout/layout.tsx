@@ -11,7 +11,7 @@ export function Layout({ children, title = 'This is the default title' }: Props)
   return (
     <>
       <Meta />
-      <div className="md:flex flex-col md:flex-row md:min-h-screen w-full">
+      <div className="w-full flex-col md:flex md:min-h-screen md:flex-row">
         <SideNav />
         <>{children}</>
       </div>

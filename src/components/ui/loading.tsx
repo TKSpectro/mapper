@@ -6,7 +6,7 @@ interface Props {
 
 export function Loading({ width = 40, height = 40, color = '#1f2937' }: Props) {
   return (
-    <div className="flex animate-fade-in-delay justify-center p-8">
+    <div className="animate-fade-in-delay flex justify-center p-8">
       {/* <!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL --> */}
       <svg
         width={width}

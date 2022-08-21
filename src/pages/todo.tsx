@@ -55,7 +55,7 @@ const Todo: NextPage = () => {
       </Head>
 
       <main className="container mx-auto flex flex-col items-center p-4">
-        <h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-700">
+        <h1 className="text-5xl font-extrabold leading-normal text-gray-700 md:text-[5rem]">
           Todo
         </h1>
         <div className="pb-4">
@@ -73,13 +73,13 @@ const Todo: NextPage = () => {
             <Button type="submit">Submit</Button>
           </Form>
         </div>
-        <div className="flex flex-wrap justify-center gap-4 p-8 select-none" ref={parent}>
+        <div className="flex select-none flex-wrap justify-center gap-4 p-8" ref={parent}>
           {isLoading && <Loading width={200} height={200} />}
           {todos?.map((item) => (
             <div
               key={item.id}
               className={clsx(
-                'relative flex h-52 w-96 animate-fade-in-down flex-col rounded border border-gray-500 bg-gray-200 shadow-xl',
+                'animate-fade-in-down relative flex h-52 w-96 flex-col rounded border border-gray-500 bg-gray-200 shadow-xl',
                 { 'opacity-50': item.completed },
               )}
             >
@@ -99,11 +99,11 @@ const Todo: NextPage = () => {
                 </div>
               </div>
 
-              <div className={clsx('px-4 py-2 text-ellipsis overflow-hidden')}>
+              <div className={clsx('overflow-hidden text-ellipsis px-4 py-2')}>
                 {item.description}
               </div>
 
-              <div className="absolute bottom-0 w-full px-4 py-2 border-t border-gray-500 text-end">
+              <div className="absolute bottom-0 w-full border-t border-gray-500 px-4 py-2 text-end">
                 {dayjs(item.createdAt).fromNow()}
               </div>
             </div>

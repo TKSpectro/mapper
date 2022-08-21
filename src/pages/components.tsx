@@ -35,11 +35,11 @@ const Components: NextPage = () => {
       </Head>
 
       <main className="container mx-auto flex flex-col items-center p-4">
-        <h1 className="text-7xl leading-normal font-extrabold text-gray-700">Components</h1>
+        <h1 className="text-7xl font-extrabold leading-normal text-gray-700">Components</h1>
 
-        <h3 className="text-5xl leading-normal font-extrabold text-gray-700">Button</h3>
+        <h3 className="text-5xl font-extrabold leading-normal text-gray-700">Button</h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-6">
           <Button>No variant</Button>
           <Button variant="primary">Primary</Button>
           <Button variant="info">Info</Button>
@@ -61,7 +61,7 @@ const Components: NextPage = () => {
         </div>
         <br />
 
-        <h3 className="text-5xl leading-normal font-extrabold text-gray-700">Form/Input</h3>
+        <h3 className="text-5xl font-extrabold leading-normal text-gray-700">Form/Input</h3>
 
         <Form
           form={form}

@@ -20,13 +20,13 @@ export const Input = forwardRef<HTMLInputElement, Props>(function Input(
     return (
       <>
         <input
-          className="bg-white text-primary focus:border-primary focus:ring-transparent self-center"
+          className="self-center bg-white text-primary focus:border-primary focus:ring-transparent"
           type={type}
           ref={ref}
           {...props}
         />
 
-        <div className="text-sm text-red-500 font-bold">
+        <div className="text-sm font-bold text-red-500">
           <>&nbsp;{error?.message}</>
         </div>
       </>
@@ -36,24 +36,24 @@ export const Input = forwardRef<HTMLInputElement, Props>(function Input(
   return (
     <div>
       {label && (
-        <label htmlFor={`input-${props.name}`} className="pb-1 px-2 text-md font-semibold">
+        <label htmlFor={`input-${props.name}`} className="text-md px-2 pb-1 font-semibold">
           {label}
         </label>
       )}
 
       <div className="relative">
         {icon && (
-          <div className="absolute inset-y-0 pl-2 left-0 flex items-center pointer-events-none">
+          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
             {icon}
 
-            <div className="ml-1.5 w-[1px] h-full bg-opacity-50 bg-gray-800"></div>
+            <div className="ml-1.5 h-full w-[1px] bg-gray-800 bg-opacity-50"></div>
           </div>
         )}
 
         <input
           id={`input-${props.name}`}
           className={clsx(
-            'bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 w-full rounded-md py-2 border focus:border-primary focus:ring-primary',
+            'w-full rounded-md border bg-white py-2 text-gray-800 focus:border-primary focus:ring-primary dark:bg-gray-900 dark:text-gray-200',
             icon && 'pl-12 pr-4 ',
             !icon && 'px-4',
           )}
@@ -63,7 +63,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(function Input(
         />
       </div>
 
-      <div className="text-sm text-red-500 font-bold">
+      <div className="text-sm font-bold text-red-500">
         <>&nbsp;{error?.message}</>
       </div>
     </div>
