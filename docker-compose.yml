@@ -1,16 +1,15 @@
 version: '3.1'
 
 volumes:
-  db_vol:
+  mapper_db_vol:
 
 services:
   db:
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
+    image: postgres:14
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mapper
-    ports:
-      - '3306:3306'
+      - POSTGRES_DB=mapper
+      - POSTGRES_PASSWORD=mapper
     volumes:
-      - db_vol:/var/lib/mysql
+      - mapper_db_vol:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
