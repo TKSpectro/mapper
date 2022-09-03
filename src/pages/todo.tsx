@@ -65,6 +65,8 @@ const Todo: NextPage = () => {
               addTodo({
                 ...data,
               });
+
+              form.reset();
             }}
           >
             <Input label="Title" {...form.register('title')} placeholder="My Todo" />
@@ -79,7 +81,7 @@ const Todo: NextPage = () => {
             <div
               key={item.id}
               className={clsx(
-                'animate-fade-in-down relative flex h-52 w-96 flex-col rounded border border-gray-500 bg-gray-200 shadow-xl',
+                'animate-fade-in-down relative flex h-52 w-96 flex-col rounded border border-gray-500 bg-gray-200 shadow-xl dark:bg-gray-800',
                 { 'opacity-50': item.completed },
               )}
             >
@@ -88,13 +90,13 @@ const Todo: NextPage = () => {
                 <div className="flex gap-4">
                   <button onClick={() => completeTodo({ id: item.id })}>
                     {item.completed ? (
-                      <HiOutlineCheckCircle className="h-6 w-6 text-gray-800" />
+                      <HiOutlineCheckCircle className="h-6 w-6 text-gray-800 dark:text-gray-200" />
                     ) : (
-                      <HiOutlineMinusCircle className="h-6 w-6 text-gray-800" />
+                      <HiOutlineMinusCircle className="h-6 w-6 text-gray-800 dark:text-gray-200" />
                     )}
                   </button>
                   <button onClick={() => removeTodo({ id: item.id })}>
-                    <HiOutlineTrash className="h-6 w-6 text-gray-800" />
+                    <HiOutlineTrash className="h-6 w-6 text-gray-800 dark:text-gray-200" />
                   </button>
                 </div>
               </div>

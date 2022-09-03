@@ -4,15 +4,18 @@ import { AppRouter } from '@/server/router';
 import '@/styles/globals.css';
 import { withTRPC } from '@trpc/next';
 import { SessionProvider } from 'next-auth/react';
+import { ThemeProvider } from 'next-themes';
 import type { AppType } from 'next/dist/shared/lib/utils';
 import superjson from 'superjson';
 
 const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => {
   return (
     <SessionProvider session={session}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <ThemeProvider defaultTheme="system" storageKey="theme" attribute="class">
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
     </SessionProvider>
   );
 };

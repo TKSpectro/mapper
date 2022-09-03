@@ -7,11 +7,11 @@ type Props = {
   title?: string;
 };
 
-export function Layout({ children, title = 'This is the default title' }: Props) {
+export function Layout({ children }: Props) {
   return (
     <>
       <Meta />
-      <div className="w-full flex-col md:flex md:min-h-screen md:flex-row">
+      <div className="w-full flex-col bg-white dark:bg-gray-900 md:flex md:min-h-screen md:flex-row">
         <SideNav />
         <>{children}</>
       </div>
